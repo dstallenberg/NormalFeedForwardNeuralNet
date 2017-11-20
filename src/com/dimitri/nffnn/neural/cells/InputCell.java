@@ -1,6 +1,6 @@
 package com.dimitri.nffnn.neural.cells;
 
-import com.dimitri.nffnn.neural.Layer;
+import com.dimitri.nffnn.neural.layers.Layer;
 
 public class InputCell extends Cell{
 
