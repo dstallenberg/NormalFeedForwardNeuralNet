@@ -16,4 +16,12 @@ public class Connection {
     public double getDeltaWeight() {
         return deltaWeight;
     }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setDeltaWeight(double deltaWeight) {
+        this.deltaWeight = deltaWeight;
+    }
 }

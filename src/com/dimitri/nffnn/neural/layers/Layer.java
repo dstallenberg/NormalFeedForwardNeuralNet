@@ -18,4 +18,11 @@ public abstract class Layer {
     public abstract Cell[] getCell();
     public abstract Cell getCell(int index);
 
+    public Net getNet() {
+        return net;
+    }
+
+    public int getLayerIndex() {
+        return layerIndex;
+    }
 }

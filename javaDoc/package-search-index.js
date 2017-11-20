@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"com.dimitri.nffnn.example"},{"l":"com.dimitri.nffnn.neural"},{"l":"com.dimitri.nffnn.neural.cells"},{"l":"com.dimitri.nffnn.neural.layers"}]

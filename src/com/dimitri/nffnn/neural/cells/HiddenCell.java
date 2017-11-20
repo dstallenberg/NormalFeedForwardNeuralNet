@@ -1,6 +1,7 @@
 package com.dimitri.nffnn.neural.cells;
 
 import com.dimitri.nffnn.neural.Connection;
+import com.dimitri.nffnn.neural.ProcessorCell;
 import com.dimitri.nffnn.neural.layers.Layer;
 
 import java.util.Random;
@@ -11,6 +12,8 @@ public class HiddenCell extends Cell{
     private double alpha = 0.7;
 
     private Connection[] connection;
+
+    private double gradient;
 
     public HiddenCell(Layer layer, int cellIndex, int inputAmount) {
         super(layer, cellIndex);
@@ -26,6 +29,46 @@ public class HiddenCell extends Cell{
         for (int i = 0; i < connection.length; i++) {
             connection[i] = new Connection(weights[i]);
         }
+    }
+
+    public void feedForward(){
+        double sum = 0;
+        Layer previousLayer = getLayer().getNet().getLayer(getLayer().getLayerIndex()-1);
+
+        for (int i = 0; i < previousLayer.getCell().length; i++) {
+            sum += previousLayer.getCell(i).getOutput() * connection[i].getWeight();
+        }
+        setOutput(ProcessorCell.tanh(sum));
+    }
+
+    public void calcOutputGradient(double targetOutput){
+        double delta = targetOutput - getOutput();
+        gradient = delta * ProcessorCell.derrivativeTanh(getOutput());
+    }
+
+    public void calcHiddenGradient(){
+        double sum = 0;
+
+        for (int i = 0; i < getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell().length; i++) {
+            sum += ((HiddenCell)getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell(i)).getConnection(i).getWeight()*((HiddenCell)getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell(i)).getGradient();
+        }
+
+        double dow = sum;
+        gradient = dow * ProcessorCell.derrivativeTanh(getOutput());
+    }
+
+    public void updateWeights(){
+        for (int i = 0; i < getLayer().getNet().getLayer(getLayer().getLayerIndex()-1).getCell().length; i++) {
+            Cell cell = getLayer().getNet().getLayer(getLayer().getLayerIndex()-1).getCell(i);
+            double oldDeltaWeight = connection[i].getDeltaWeight();
+            double newDeltaWeight = eta * cell.getOutput() * gradient + alpha * oldDeltaWeight;
+            connection[i].setDeltaWeight(newDeltaWeight);
+            connection[i].setWeight(connection[i].getWeight()+newDeltaWeight);
+        }
+    }
+
+    public double getGradient() {
+        return gradient;
     }
 
     public Connection[] getConnection(){
