@@ -8,4 +8,12 @@ public class Connection {
     public Connection(double weight){
         this.weight = weight;
     }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public double getDeltaWeight() {
+        return deltaWeight;
+    }
 }

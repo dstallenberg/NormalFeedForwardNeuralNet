@@ -1,5 +1,6 @@
 package com.dimitri.nffnn.neural.cells;
 
+import com.dimitri.nffnn.neural.Connection;
 import com.dimitri.nffnn.neural.layers.Layer;
 
 public abstract class Cell {
@@ -11,5 +12,4 @@ public abstract class Cell {
         this.layer = layer;
         this.cellIndex = cellIndex;
     }
-
 }

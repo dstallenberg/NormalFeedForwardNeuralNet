@@ -11,6 +11,9 @@ public class InputLayer extends Layer{
     public InputLayer(Net net, int cellAmount) {
         super(net, 0, cellAmount);
         cell = new InputCell[cellAmount];
+        for (int i = 0; i < cell.length; i++) {
+            cell[i] = new InputCell(this, i);
+        }
     }
 
     @Override

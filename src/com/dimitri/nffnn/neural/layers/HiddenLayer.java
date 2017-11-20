@@ -10,11 +10,17 @@ public class HiddenLayer extends Layer{
     public HiddenLayer(Net net, int layerIndex, int cellAmount) {
         super(net, layerIndex, cellAmount);
         cell = new HiddenCell[cellAmount];
+        for (int i = 0; i < cell.length; i++) {
+            cell[i] = new HiddenCell(this, i, net.getLayer(layerIndex-1).getCell().length);
+        }
     }
 
     public HiddenLayer(Net net, int layerIndex, double[][] weights) {
         super(net, layerIndex, weights.length);
         cell = new HiddenCell[weights.length];
+        for (int i = 0; i < cell.length; i++) {
+            cell[i] = new HiddenCell(this, i, net.getLayer(layerIndex-1).getCell().length, weights[i]);
+        }
     }
 
     @Override
