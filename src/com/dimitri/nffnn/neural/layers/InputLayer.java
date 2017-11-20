@@ -1,7 +1,6 @@
 package com.dimitri.nffnn.neural.layers;
 
 import com.dimitri.nffnn.neural.Net;
-import com.dimitri.nffnn.neural.cells.Cell;
 import com.dimitri.nffnn.neural.cells.InputCell;
 
 public class InputLayer extends Layer{

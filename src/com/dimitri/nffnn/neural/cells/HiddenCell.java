@@ -9,7 +9,7 @@ import java.util.Random;
 public class HiddenCell extends Cell{
 
     private double eta = 0.01;
-    private double alpha = 0.7;
+    private double alpha = 0.9;
 
     private Connection[] connection;
 
@@ -38,6 +38,7 @@ public class HiddenCell extends Cell{
         for (int i = 0; i < previousLayer.getCell().length; i++) {
             sum += previousLayer.getCell(i).getOutput() * connection[i].getWeight();
         }
+        sum += 1*connection[connection.length-1].getWeight();
         setOutput(ProcessorCell.tanh(sum));
     }
 
@@ -50,9 +51,8 @@ public class HiddenCell extends Cell{
         double sum = 0;
 
         for (int i = 0; i < getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell().length; i++) {
-            sum += ((HiddenCell)getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell(i)).getConnection(i).getWeight()*((HiddenCell)getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell(i)).getGradient();
+            sum += ((HiddenCell)getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell(i)).getConnection(getCellIndex()).getWeight()*((HiddenCell)getLayer().getNet().getLayer(getLayer().getLayerIndex()+1).getCell(i)).getGradient();
         }
-
         double dow = sum;
         gradient = dow * ProcessorCell.derrivativeTanh(getOutput());
     }
