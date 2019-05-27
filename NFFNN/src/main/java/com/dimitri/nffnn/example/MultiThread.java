@@ -30,7 +30,7 @@ public class MultiThread extends Thread{
                         }
                     }
                 }else if(threadName.equals("Render")){
-                    unit.render();
+//                    unit.render();
                     try {
                         Thread.sleep(((long)(1.0/60.0)));
                     } catch (InterruptedException var3) {

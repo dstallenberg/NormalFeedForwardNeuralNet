@@ -14,11 +14,9 @@ package com.dimitri.nffnn.example;
         import java.awt.event.WindowAdapter;
         import java.awt.event.WindowEvent;
         import java.awt.image.VolatileImage;
-        import java.io.FileNotFoundException;
         import java.util.Random;
 
-public class Unit
-{
+public class Unit {
     private Frame frame;
     private Canvas canvas;
 
@@ -79,7 +77,6 @@ public class Unit
         frame.setVisible(true);
         gc = canvas.getGraphicsConfiguration();
         vImage = gc.createCompatibleVolatileImage(GAME_WIDTH, GAME_HEIGHT);
-
     }
 
     private void getBestSize(){
@@ -109,11 +106,9 @@ public class Unit
         System.out.println("Input: " + input[0] + ", " + input[1]);
         System.out.println("Target: " + target[0] + ", " + target[1]);
         System.out.println("Output: " + output[0] + ", " + output[1]);
-        System.out.println(net.getRecentAverageError());
-
+        System.out.println("Average Error: " + net.getRecentAverageError());
         graph.addValue(net.getRecentAverageError());
         graph.update();
-
     }
 
     public void render(){
@@ -127,20 +122,17 @@ public class Unit
         g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
         g.setColor(Color.WHITE);
-        /**Draw stuff here*/
-
+        /*Draw stuff here*/
         graph.render(g);
 
-//        g.setColor(Color.GREEN);
-//        g.drawString("FPS: " + String.valueOf(FPS) , 0, 10);
-//        g.drawString("UPS: " + String.valueOf(UPS) , 60, 10);
+		//        g.setColor(Color.GREEN);
+		//        g.drawString("FPS: " + String.valueOf(FPS) , 0, 10);
+		//        g.drawString("UPS: " + String.valueOf(UPS) , 60, 10);
 
         g = canvas.getGraphics();
         g.drawImage(vImage, 0, 0, canvasWidth, canvasHeight, null);
 
         g.dispose();
     }
-
-
 
 }

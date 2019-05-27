@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/NFFNN/NFFNN.iml" filepath="$PROJECT_DIR$/NFFNN/NFFNN.iml" />
       <module fileurl="file://$PROJECT_DIR$/NormalFeedForwardNeuralNet.iml" filepath="$PROJECT_DIR$/NormalFeedForwardNeuralNet.iml" />
     </modules>
   </component>
